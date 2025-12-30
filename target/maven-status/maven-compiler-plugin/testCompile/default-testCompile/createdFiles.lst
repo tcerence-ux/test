@@ -1,8 +1,0 @@
-com\pages\HomePage.class
-com\utils\Listeners.class
-com\tests\HomePageTest.class
-com\tests\ShoppingCartTest.class
-com\tests\BaseTest.class
-com\base\Base.class
-com\utils\DriverManager.class
-com\pages\ShoppingCartPage.class
