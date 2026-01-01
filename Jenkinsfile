@@ -25,12 +25,14 @@ pipeline {
                 bat 'mvn clean test -Dsurefire.suiteXmlFiles=testng.xml'
             }
         }
+
+        stage('Publish Test Results') {
+            steps {
+                testng reportFilenamePattern: '**/target/surefire-reports/testng-results.xml', showFailedBuilds: true
+            }
     }
 
     post {
-        always {
-            testng '**/target/surefire-reports/*.xml'
-        }
         success {
             echo 'Tests passed successfully!'
         }
