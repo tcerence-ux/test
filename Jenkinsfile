@@ -31,6 +31,7 @@ pipeline {
                 testng reportFilenamePattern: '**/target/surefire-reports/testng-results.xml', showFailedBuilds: true
             }
     }
+    }
 
     post {
         success {
