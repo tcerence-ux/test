@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                bat 'mvn test'
+                bat 'mvn clean test -Dsurefire.suiteXmlFiles=testng.xml'
             }
         }
     }
