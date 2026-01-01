@@ -5,16 +5,10 @@
 		<listener class-name="com.utils.Listeners"></listener>
 	</listeners>
 	
-	    <test name="edge Test">
-	  <parameter name="browsername" value="edge"></parameter>
-    <classes>
-      <class name="com.tests.HomePageTest"/>
-      <class name="com.tests.ShoppingCartTest"/>
-    </classes>
-  </test> <!-- Test -->
   
   <test name="chrome Test">
 	  <parameter name="browsername" value="chrome"></parameter>
+	  <parameter name="os" value="linux"></parameter>
     <classes>
       <class name="com.tests.HomePageTest"/>
       <class name="com.tests.ShoppingCartTest"/>
@@ -23,6 +17,7 @@
   
     <test name="firefox Test">
 	  <parameter name="browsername" value="firefox"></parameter>
+	  <parameter name="os" value="linux"></parameter>
     <classes>
       <class name="com.tests.HomePageTest"/>
       <class name="com.tests.ShoppingCartTest"/>

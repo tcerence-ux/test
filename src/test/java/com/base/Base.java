@@ -2,21 +2,19 @@ package com.base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
@@ -30,23 +28,35 @@ public class Base {
 	public static ExtentReports reports;
     public static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 	
-	public void TestSetup(String br) {
+	public void TestSetup(String br, String os) {
+		
+		DesiredCapabilities cap = new DesiredCapabilities();
 		switch(br) {
 		
 		case "chrome":
-			driver = new ChromeDriver();
+			cap.setBrowserName("chrome");
+			cap.setPlatform(Platform.LINUX);
+			//driver = new ChromeDriver();
 			break;
 		case "firefox":
-			driver = new FirefoxDriver();
+			cap.setBrowserName("firefox");
+			cap.setPlatform(Platform.LINUX);
+			//driver = new FirefoxDriver();
 			break;
 		case "edge":
-			driver = new EdgeDriver();
+			cap.setBrowserName("edge");
+			//driver = new EdgeDriver();
 			break;
 		default:
 			logger.error("Invalid browsername is provided pelase check and provide correct name");
 			return;
 			}
-		
+		try {
+			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driverThread.set(driver);
 		driverThread.get().get(properties.getProperty("url"));
 		driverThread.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

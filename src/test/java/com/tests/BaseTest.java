@@ -15,9 +15,9 @@ public class BaseTest extends Base{
 
 	
 	@BeforeTest
-	@Parameters({"browsername"})
-	public void testSetup(String br) {
-		TestSetup(br);
+	@Parameters({"browsername","os"})
+	public void testSetup(String br, String os) {
+		TestSetup(br,os);
 	}
 	
 	@BeforeSuite
