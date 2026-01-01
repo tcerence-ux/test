@@ -29,7 +29,7 @@ pipeline {
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+            testng '**/target/surefire-reports/*.xml'
         }
         success {
             echo 'Tests passed successfully!'
